@@ -1,13 +1,16 @@
-Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/07/22 23:36:45
-Remove Me!     (RemoveMe.asm				     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    01/18/22 16:49:10
+#Program Template     (template.asm			     Page 1 - 1
 
 
-				TITLE Remove Me!     (RemoveMe.asm)
+				TITLE Program Template     (template.asm)
 
-				; Author: 	Stephen Redfield
-				; Last Modified:	May 11, 2020
-				; Course number/section:   CS271 Section ???
-				; Description: This file is provided so you have something to remove from a Solution
+				; Author: Devon Braner
+				; Last Modified:
+				; OSU email address: branerd@oregonstate.edu
+				; Course number/section:   CS271 Section 400
+				; Project Number: Project 1        Due Date: 1/24/2022
+				; Description: Displays name, program title, and instructions for user. Prompts user to enter 3 numbers in descending order,
+				;				calculates and displays sum & differences. Displays a closing message.
 
 				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
@@ -29,36 +32,313 @@ Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/07/22 23:36:45
 			      C 
 
  00000000			.data
- 00000000 49 66 20 79 6F	Greeting	BYTE	"If you're seeing this, you haven't removed this .asm file yet!",0
-	   75 27 72 65 20
-	   73 65 65 69 6E
+
+ 00000000 42 61 73 69 63		intro			BYTE	"Basic Logic and Arithmetic Program		by Devon Braner",0
+	   20 4C 6F 67 69
+	   63 20 61 6E 64
+	   20 41 72 69 74
+	   68 6D 65 74 69
+	   63 20 50 72 6F
+	   67 72 61 6D 09
+	   09 62 79 20 44
+	   65 76 6F 6E 20
+	   42 72 61 6E 65
+	   72 00
+ 00000034 50 6C 65 61 73		instructions	BYTE	"Please enter 3 numbers. They must be in descending order.",0
+	   65 20 65 6E 74
+	   65 72 20 33 20
+	   6E 75 6D 62 65
+	   72 73 2E 20 54
+	   68 65 79 20 6D
+	   75 73 74 20 62
+	   65 20 69 6E 20
+	   64 65 73 63 65
+	   6E 64 69 6E 67
+	   20 6F 72 64 65
+	   72 2E 00
+					
+					; prompts and variables for user input:
+ 0000006E 46 69 72 73 74		prompt_1		BYTE	"First Number: ",0
+	   20 4E 75 6D 62
+	   65 72 3A 20 00
+ 0000007D 00000000			num_A			DWORD	?
+ 00000081 53 65 63 6F 6E		prompt_2		BYTE	"Second Number: ",0
+	   64 20 4E 75 6D
+	   62 65 72 3A 20
+	   00
+ 00000091 00000000			num_B			DWORD	?
+ 00000095 54 68 69 72 64		prompt_3		BYTE	"Third Number: ",0
+	   20 4E 75 6D 62
+	   65 72 3A 20 00
+ 000000A4 00000000			num_C			DWORD	?
+					
+					; values to be calculated:
+ 000000A8 00000000			AB_sum			DWORD	?
+ 000000AC 00000000			AB_difference	DWORD	?
+ 000000B0 00000000			AC_sum			DWORD	?
+ 000000B4 00000000			AC_difference	DWORD	?
+ 000000B8 00000000			BC_sum			DWORD	?
+ 000000BC 00000000			BC_difference	DWORD	?
+ 000000C0 00000000			ABC_sum			DWORD	?
+
+					; for results display:
+ 000000C4 20 2B 20 00			plus			BYTE	" + ",0
+ 000000C8 20 2D 20 00			minus			BYTE	" - ",0
+ 000000CC 20 3D 20 00			equals			BYTE	" = ",0
+
+					; EXTRA CREDIT for results display:
+ 000000D0 2A 2A 45 43 3A		ec1_description	BYTE	"**EC: Repeat until the user chooses to quit.",0
+	   20 52 65 70 65
+	   61 74 20 75 6E
+	   74 69 6C 20 74
+	   68 65 20 75 73
+	   65 72 20 63 68
+	   6F 6F 73 65 73
+	   20 74 6F 20 71
+	   75 69 74 2E 00
+ 000000FD 2A 2A 45 43 3A		ec2_description	BYTE	"**EC: Verify descending order.",0
+	   20 56 65 72 69
+	   66 79 20 64 65
+	   73 63 65 6E 64
+	   69 6E 67 20 6F
+	   72 64 65 72 2E
+	   00
+ 0000011C 2A 2A 45 43 3A		ec3_description	BYTE	"**EC: Computes B-A, C-A, C-B, C-B-A. Handles negative results.",0
+	   20 43 6F 6D 70
+	   75 74 65 73 20
+	   42 2D 41 2C 20
+	   43 2D 41 2C 20
+	   43 2D 42 2C 20
+	   43 2D 42 2D 41
+	   2E 20 48 61 6E
+	   64 6C 65 73 20
+	   6E 65 67 61 74
+	   69 76 65 20 72
+	   65 73 75 6C 74
+	   73 2E 00
+ 0000015B 2A 2A 45 43 3A		ec4_description	BYTE	"**EC: Calculates and displays A/B, A/C, B/C. Prints Quotient and Remainder.",0
+	   20 43 61 6C 63
+	   75 6C 61 74 65
+	   73 20 61 6E 64
+	   20 64 69 73 70
+	   6C 61 79 73 20
+	   41 2F 42 2C 20
+	   41 2F 43 2C 20
+	   42 2F 43 2E 20
+	   50 72 69 6E 74
+	   73 20 51 75 6F
+	   74 69 65 6E 74
+	   20 61 6E 64 20
+	   52 65 6D 61 69
+	   6E 64 65 72 2E
+	   00
+ 000001A7 20 2F 20 00			divided_by		BYTE	" / ",0
+ 000001AB 20 77 69 74 68		remainder		BYTE	" with remainder: ",0
+	   20 72 65 6D 61
+	   69 6E 64 65 72
+	   3A 20 00
+
+					; EXTRA CREDIT values to be calculated
+ 000001BD 00000000			BA_difference	SDWORD	?
+ 000001C1 00000000			CA_difference	SDWORD	?
+ 000001C5 00000000			CB_difference	SDWORD	?
+ 000001C9 00000000			CBA_difference	SDWORD	?
+					
+ 000001CD 00000000			AB_quotient		DWORD	?
+ 000001D1 00000000			AB_remainder	DWORD	?
+ 000001D5 00000000			AC_quotient		DWORD	?
+ 000001D9 00000000			AC_remainder	DWORD	?
+ 000001DD 00000000			BC_quotient		DWORD	?
+ 000001E1 00000000			BC_remainder	DWORD	?
+
+					; Closing message
+ 000001E5 54 68 61 6E 6B		goodbye			BYTE	"Thanks for using this program! Bye.",0
+	   73 20 66 6F 72
+	   20 75 73 69 6E
 	   67 20 74 68 69
-	   73 2C 20 79 6F
-	   75 20 68 61 76
-	   65 6E 27 74 20
-	   72 65 6D 6F 76
-	   65 64 20 74 68
-	   69 73 20 2E 61
-	   73 6D 20 66 69
-	   6C 65 20 79 65
-	   74 21 00
+	   73 20 70 72 6F
+	   67 72 61 6D 21
+	   20 42 79 65 2E
+	   00
 
 
  00000000			.code
  00000000			main PROC
- 00000000  BA 00000000 R		MOV	EDX, OFFSET Greeting
- 00000005  E8 00000000 E		Call WriteString
- 0000000A  E8 00000000 E		Call CrLf
+
+					; Introduce program and display instructions
+ 00000000  BA 00000000 R		MOV		EDX, OFFSET intro
+ 00000005  E8 00000000 E		CALL	WriteString
+ 0000000A  E8 00000000 E		CALL	CrLf
+
+ 0000000F  BA 00000034 R		MOV		EDX, OFFSET instructions
+ 00000014  E8 00000000 E		CALL	WriteString
+ 00000019  E8 00000000 E		CALL	CrLf
+
+					; Get numbers from user
+ 0000001E  BA 0000006E R		MOV		EDX, OFFSET prompt_1
+ 00000023  E8 00000000 E		CALL	WriteString
+ 00000028  E8 00000000 E		CALL	ReadDec
+ 0000002D  A3 0000007D R		MOV		num_A, EAX
+
+ 00000032  BA 00000081 R		MOV		EDX, OFFSET prompt_2
+ 00000037  E8 00000000 E		CALL	WriteString
+ 0000003C  E8 00000000 E		CALL	ReadDec
+ 00000041  A3 00000091 R		MOV		num_B, EAX
+
+ 00000046  BA 00000095 R		MOV		EDX, OFFSET prompt_3
+ 0000004B  E8 00000000 E		CALL	WriteString
+ 00000050  E8 00000000 E		CALL	ReadDec
+ 00000055  A3 000000A4 R		MOV		num_C, EAX
+ 0000005A  E8 00000000 E		CALL	CrLf
+
+					; EXTRA CREDIT: check if numbers are not in descending order
+
+
+					; Calculate sums
+ 0000005F  A1 0000007D R		MOV		EAX, num_A
+ 00000064  8B 1D 00000091 R		MOV		EBX, num_B
+ 0000006A  03 C3			ADD		EAX, EBX
+ 0000006C  A3 000000A8 R		MOV		AB_sum, EAX
+
+ 00000071  A1 0000007D R		MOV		EAX, num_A
+ 00000076  8B 1D 000000A4 R		MOV		EBX, num_C
+ 0000007C  03 C3			ADD		EAX, EBX
+ 0000007E  A3 000000B0 R		MOV		AC_sum, EAX
+
+ 00000083  A1 00000091 R		MOV		EAX, num_B
+ 00000088  8B 1D 000000A4 R		MOV		EBX, num_C
+ 0000008E  03 C3			ADD		EAX, EBX
+ 00000090  A3 000000B8 R		MOV		BC_sum, EAX
+
+ 00000095  A1 000000A8 R		MOV		EAX, AB_sum
+ 0000009A  8B 1D 000000A4 R		MOV		EBX, num_C
+ 000000A0  03 C3			ADD		EAX, EBX
+ 000000A2  A3 000000C0 R		MOV		ABC_sum, EAX
+
+					; Calculate differences
+ 000000A7  A1 0000007D R		MOV		EAX, num_A
+ 000000AC  8B 1D 00000091 R		MOV		EBX, num_B
+ 000000B2  2B C3			SUB		EAX, EBX
+ 000000B4  A3 000000AC R		MOV		AB_difference, EAX
+
+ 000000B9  A1 0000007D R		MOV		EAX, num_A
+ 000000BE  8B 1D 000000A4 R		MOV		EBX, num_C
+ 000000C4  2B C3			SUB		EAX, EBX
+ 000000C6  A3 000000B4 R		MOV		AC_difference, EAX
+
+ 000000CB  A1 00000091 R		MOV		EAX, num_B
+ 000000D0  8B 1D 000000A4 R		MOV		EBX, num_C
+ 000000D6  2B C3			SUB		EAX, EBX
+ 000000D8  A3 000000BC R		MOV		BC_difference, EAX
+
+					; EXTRA CREDIT: handle negative results
+
+
+					; EXTRA CREDIT: calculate quotients (with remainders)
+
+
+					; Display results
+ 000000DD  A1 0000007D R		MOV		EAX, num_A
+ 000000E2  E8 00000000 E		CALL	WriteDec
+ 000000E7  BA 000000C4 R		MOV		EDX, OFFSET plus
+ 000000EC  E8 00000000 E		CALL	WriteString
+ 000000F1  A1 00000091 R		MOV		EAX, num_B
+ 000000F6  E8 00000000 E		CALL	WriteDec
+ 000000FB  BA 000000CC R		MOV		EDX, OFFSET equals
+ 00000100  E8 00000000 E		CALL	WriteString
+ 00000105  A1 000000A8 R		MOV		EAX, AB_sum
+ 0000010A  E8 00000000 E		CALL	WriteDec
+ 0000010F  E8 00000000 E		CALL	CrLf
+
+ 00000114  A1 0000007D R		MOV		EAX, num_A
+ 00000119  E8 00000000 E		CALL	WriteDec
+ 0000011E  BA 000000C8 R		MOV		EDX, OFFSET minus
+ 00000123  E8 00000000 E		CALL	WriteString
+ 00000128  A1 00000091 R		MOV		EAX, num_B
+ 0000012D  E8 00000000 E		CALL	WriteDec
+ 00000132  BA 000000CC R		MOV		EDX, OFFSET equals
+ 00000137  E8 00000000 E		CALL	WriteString
+ 0000013C  A1 000000AC R		MOV		EAX, AB_difference
+ 00000141  E8 00000000 E		CALL	WriteDec
+ 00000146  E8 00000000 E		CALL	CrLf
+
+ 0000014B  A1 0000007D R		MOV		EAX, num_A
+ 00000150  E8 00000000 E		CALL	WriteDec
+ 00000155  BA 000000C4 R		MOV		EDX, OFFSET plus
+ 0000015A  E8 00000000 E		CALL	WriteString
+ 0000015F  A1 000000A4 R		MOV		EAX, num_C
+ 00000164  E8 00000000 E		CALL	WriteDec
+ 00000169  BA 000000CC R		MOV		EDX, OFFSET equals
+ 0000016E  E8 00000000 E		CALL	WriteString
+ 00000173  A1 000000B0 R		MOV		EAX, AC_sum
+ 00000178  E8 00000000 E		CALL	WriteDec
+ 0000017D  E8 00000000 E		CALL	CrLf
+
+ 00000182  A1 0000007D R		MOV		EAX, num_A
+ 00000187  E8 00000000 E		CALL	WriteDec
+ 0000018C  BA 000000C8 R		MOV		EDX, OFFSET minus
+ 00000191  E8 00000000 E		CALL	WriteString
+ 00000196  A1 000000A4 R		MOV		EAX, num_C
+ 0000019B  E8 00000000 E		CALL	WriteDec
+ 000001A0  BA 000000CC R		MOV		EDX, OFFSET equals
+ 000001A5  E8 00000000 E		CALL	WriteString
+ 000001AA  A1 000000B4 R		MOV		EAX, AC_difference
+ 000001AF  E8 00000000 E		CALL	WriteDec
+ 000001B4  E8 00000000 E		CALL	CrLf
+
+ 000001B9  A1 00000091 R		MOV		EAX, num_B
+ 000001BE  E8 00000000 E		CALL	WriteDec
+ 000001C3  BA 000000C4 R		MOV		EDX, OFFSET plus
+ 000001C8  E8 00000000 E		CALL	WriteString
+ 000001CD  A1 000000A4 R		MOV		EAX, num_C
+ 000001D2  E8 00000000 E		CALL	WriteDec
+ 000001D7  BA 000000CC R		MOV		EDX, OFFSET equals
+ 000001DC  E8 00000000 E		CALL	WriteString
+ 000001E1  A1 000000B8 R		MOV		EAX, BC_sum
+ 000001E6  E8 00000000 E		CALL	WriteDec
+ 000001EB  E8 00000000 E		CALL	CrLf
+
+ 000001F0  A1 00000091 R		MOV		EAX, num_B
+ 000001F5  E8 00000000 E		CALL	WriteDec
+ 000001FA  BA 000000C8 R		MOV		EDX, OFFSET minus
+ 000001FF  E8 00000000 E		CALL	WriteString
+ 00000204  A1 000000A4 R		MOV		EAX, num_C
+ 00000209  E8 00000000 E		CALL	WriteDec
+ 0000020E  BA 000000CC R		MOV		EDX, OFFSET equals
+ 00000213  E8 00000000 E		CALL	WriteString
+ 00000218  A1 000000BC R		MOV		EAX, BC_difference
+ 0000021D  E8 00000000 E		CALL	WriteDec
+ 00000222  E8 00000000 E		CALL	CrLf
+
+ 00000227  A1 0000007D R		MOV		EAX, num_A
+ 0000022C  E8 00000000 E		CALL	WriteDec
+ 00000231  BA 000000C4 R		MOV		EDX, OFFSET plus
+ 00000236  E8 00000000 E		CALL	WriteString
+ 0000023B  A1 00000091 R		MOV		EAX, num_B
+ 00000240  E8 00000000 E		CALL	WriteDec
+ 00000245  E8 00000000 E		CALL	WriteString		; plus already OFFSET
+ 0000024A  A1 000000A4 R		MOV		EAX, num_C
+ 0000024F  E8 00000000 E		CALL	WriteDec
+ 00000254  BA 000000CC R		MOV		EDX, OFFSET equals
+ 00000259  E8 00000000 E		CALL	WriteString
+ 0000025E  A1 000000B8 R		MOV		EAX, BC_sum
+ 00000263  E8 00000000 E		CALL	WriteDec
+ 00000268  E8 00000000 E		CALL	CrLf
+ 0000026D  E8 00000000 E		CALL	CrLf
+
+					; Say goodbye
+ 00000272  BA 000001E5 R		MOV		EDX, OFFSET goodbye
+ 00000277  E8 00000000 E		CALL	WriteString
+ 0000027C  E8 00000000 E		Call	CrLf
 
 					Invoke ExitProcess,0	; exit to operating system
- 0000000F  6A 00	   *	    push   +000000000h
- 00000011  E8 00000000 E   *	    call   ExitProcess
- 00000016			main ENDP
-
+ 00000281  6A 00	   *	    push   +000000000h
+ 00000283  E8 00000000 E   *	    call   ExitProcess
+ 00000288			main ENDP
 
 				END main
-Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/07/22 23:36:45
-Remove Me!     (RemoveMe.asm				     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    01/18/22 16:49:10
+#Program Template     (template.asm			     Symbols 2 - 1
 
 
 
@@ -151,8 +431,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000003F Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000209 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000288 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -259,7 +539,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000016 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000288 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -278,8 +558,25 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
+ABC_sum  . . . . . . . . . . . .	DWord	 000000C0 _DATA	
+AB_difference  . . . . . . . . .	DWord	 000000AC _DATA	
+AB_quotient  . . . . . . . . . .	DWord	 000001CD _DATA	
+AB_remainder . . . . . . . . . .	DWord	 000001D1 _DATA	
+AB_sum . . . . . . . . . . . . .	DWord	 000000A8 _DATA	
+AC_difference  . . . . . . . . .	DWord	 000000B4 _DATA	
+AC_quotient  . . . . . . . . . .	DWord	 000001D5 _DATA	
+AC_remainder . . . . . . . . . .	DWord	 000001D9 _DATA	
+AC_sum . . . . . . . . . . . . .	DWord	 000000B0 _DATA	
 ALT_MASK . . . . . . . . . . . .	Number	 00000003h   
+BA_difference  . . . . . . . . .	DWord	 000001BD _DATA	
+BC_difference  . . . . . . . . .	DWord	 000000BC _DATA	
+BC_quotient  . . . . . . . . . .	DWord	 000001DD _DATA	
+BC_remainder . . . . . . . . . .	DWord	 000001E1 _DATA	
+BC_sum . . . . . . . . . . . . .	DWord	 000000B8 _DATA	
 CAPSLOCK_ON  . . . . . . . . . .	Number	 00000080h   
+CA_difference  . . . . . . . . .	DWord	 000001C1 _DATA	
+CBA_difference . . . . . . . . .	DWord	 000001C9 _DATA	
+CB_difference  . . . . . . . . .	DWord	 000001C5 _DATA	
 CREATE_ALWAYS  . . . . . . . . .	Number	 00000002h   
 CREATE_NEW . . . . . . . . . . .	Number	 00000001h   
 CTRL_MASK  . . . . . . . . . . .	Number	 0000000Ch   
@@ -327,7 +624,6 @@ GENERIC_EXECUTE  . . . . . . . .	Number	 20000000h
 GENERIC_READ . . . . . . . . . .	Number	 -80000000h   
 GENERIC_WRITE  . . . . . . . . .	Number	 40000000h   
 GetCommandLine . . . . . . . . .	Text   	 GetCommandLineA
-Greeting . . . . . . . . . . . .	Byte	 00000000 _DATA	
 HANDLE . . . . . . . . . . . . .	Text   	 DWORD
 HEAP_GENERATE_EXCEPTIONS . . . .	Number	 00000004h   
 HEAP_GROWABLE  . . . . . . . . .	Number	 00000002h   
@@ -483,9 +779,18 @@ black  . . . . . . . . . . . . .	Number	 00000000h
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
+divided_by . . . . . . . . . . .	Byte	 000001A7 _DATA	
+ec1_description  . . . . . . . .	Byte	 000000D0 _DATA	
+ec2_description  . . . . . . . .	Byte	 000000FD _DATA	
+ec3_description  . . . . . . . .	Byte	 0000011C _DATA	
+ec4_description  . . . . . . . .	Byte	 0000015B _DATA	
+equals . . . . . . . . . . . . .	Byte	 000000CC _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
+goodbye  . . . . . . . . . . . .	Byte	 000001E5 _DATA	
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
+instructions . . . . . . . . . .	Byte	 00000034 _DATA	
+intro  . . . . . . . . . . . . .	Byte	 00000000 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -493,7 +798,16 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+minus  . . . . . . . . . . . . .	Byte	 000000C8 _DATA	
+num_A  . . . . . . . . . . . . .	DWord	 0000007D _DATA	
+num_B  . . . . . . . . . . . . .	DWord	 00000091 _DATA	
+num_C  . . . . . . . . . . . . .	DWord	 000000A4 _DATA	
+plus . . . . . . . . . . . . . .	Byte	 000000C4 _DATA	
+prompt_1 . . . . . . . . . . . .	Byte	 0000006E _DATA	
+prompt_2 . . . . . . . . . . . .	Byte	 00000081 _DATA	
+prompt_3 . . . . . . . . . . . .	Byte	 00000095 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
+remainder  . . . . . . . . . . .	Byte	 000001AB _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
