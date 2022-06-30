@@ -13,7 +13,7 @@ INCLUDE Irvine32.inc
 ; 
 ; Print a string stored in a specific memory location 
 ; 
-; Preconditions: 
+; Preconditions: None
 ; 
 ; Receives: string_param, memory OFFSET of a string.
 ; 
