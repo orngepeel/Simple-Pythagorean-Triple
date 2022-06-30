@@ -1,11 +1,11 @@
-Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 14:50:17
 /Pythagorean Triple     (pythagorean_triple.asm		     Page 1 - 1
 
 
 				TITLE Pythagorean Triple     (pythagorean_triple.asm)
 
 				; Author: Devon Braner
-				; Last Modified: 6/29/2022
+				; Last Modified: 6/30/2022
 				; Description: A simple program that uses the pythagorean theorem to calculate
 				;				the third value in a Pythagorean Triple given two numbers input
 				;				by the user.
@@ -53,15 +53,16 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 					; variables
  00000000 00000000			dec_a			DWORD	?
  00000004 00000000			dec_b			DWORD	?
- 00000008 00000000			dec_c			DWORD	?
+ 00000008				dec_c			REAL8	?
+	   0000000000000000
 
 					; squared variables
- 0000000C 00000000			a_squared		DWORD	?
- 00000010 00000000			b_squared		DWORD	?
- 00000014 00000000			c_squared		DWORD	?
+ 00000010 00000000			a_squared		DWORD	?
+ 00000014 00000000			b_squared		DWORD	?
+ 00000018 00000000			c_squared		DWORD	?
 
 					; strings
- 00000018 53 69 6D 70 6C		title_disp		BYTE	"Simple Pythagorean Triple Program			By Devon Braner",13,10,13,10,0
+ 0000001C 53 69 6D 70 6C		title_disp		BYTE	"Simple Pythagorean Triple Program			By Devon Braner",13,10,13,10,0
 	   65 20 50 79 74
 	   68 61 67 6F 72
 	   65 61 6E 20 54
@@ -73,7 +74,7 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 	   42 72 61 6E 65
 	   72 0D 0A 0D 0A
 	   00
- 00000050 57 65 6C 63 6F		introduction	BYTE	"Welcome! You will be prompted to enter two positive integer.",13,10,
+ 00000054 57 65 6C 63 6F		introduction	BYTE	"Welcome! You will be prompted to enter two positive integers.",13,10,
 	   6D 65 21 20 59
 	   6F 75 20 77 69
 	   6C 6C 20 62 65
@@ -84,66 +85,66 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 	   77 6F 20 70 6F
 	   73 69 74 69 76
 	   65 20 69 6E 74
-	   65 67 65 72 2E
-	   0D 0A 54 68 65
-	   20 70 72 6F 67
-	   72 61 6D 20 77
-	   69 6C 6C 20 74
-	   68 65 6E 20 75
-	   73 65 20 74 68
-	   65 20 50 79 74
-	   68 61 67 6F 72
-	   65 61 6E 20 54
-	   68 65 6F 72 65
-	   6D 20 74 6F 20
-	   66 69 6E 64 20
-	   74 68 65 20 74
-	   68 69 72 64 20
-	   76 61 6C 75 65
-	   20 69 6E 20 74
+	   65 67 65 72 73
+	   2E 0D 0A 54 68
+	   65 20 70 72 6F
+	   67 72 61 6D 20
+	   77 69 6C 6C 20
+	   74 68 65 6E 20
+	   75 73 65 20 74
 	   68 65 20 50 79
 	   74 68 61 67 6F
 	   72 65 61 6E 20
-	   54 72 69 70 6C
-	   65 2E 0D 0A 0D
-	   0A 44 69 73 63
-	   6C 61 69 6D 65
-	   72 3A 20 54 68
-	   69 73 20 70 72
-	   6F 67 72 61 6D
-	   20 64 6F 65 73
-	   20 6E 6F 74 20
-	   63 75 72 72 65
-	   6E 74 6C 79 20
-	   70 65 72 66 6F
-	   72 6D 20 76 61
-	   6C 69 64 61 74
-	   69 6F 6E 2C 20
-	   61 6E 64 20 64
-	   6F 65 73 6E 27
-	   74 20 61 63 63
-	   75 72 61 74 65
-	   6C 79 20 63 61
-	   6C 63 75 6C 61
-	   74 65 20 63 20
-	   75 6E 6C 65 73
-	   73 20 69 74 20
-	   69 73 20 61 0D
-	   0A 70 6F 73 69
-	   74 69 76 65 20
-	   69 6E 74 65 67
-	   65 72 2E 0D 0A
-	   0D 0A 00
+	   54 68 65 6F 72
+	   65 6D 20 74 6F
+	   20 66 69 6E 64
+	   20 74 68 65 20
+	   74 68 69 72 64
+	   20 76 61 6C 75
+	   65 20 69 6E 20
+	   74 68 65 20 50
+	   79 74 68 61 67
+	   6F 72 65 61 6E
+	   20 54 72 69 70
+	   6C 65 2E 0D 0A
+	   0D 0A 44 69 73
+	   63 6C 61 69 6D
+	   65 72 3A 20 54
+	   68 69 73 20 70
+	   72 6F 67 72 61
+	   6D 20 64 6F 65
+	   73 20 6E 6F 74
+	   20 63 75 72 72
+	   65 6E 74 6C 79
+	   20 70 65 72 66
+	   6F 72 6D 20 76
+	   61 6C 69 64 61
+	   74 69 6F 6E 2C
+	   20 61 6E 64 20
+	   64 6F 65 73 6E
+	   27 74 20 61 63
+	   63 75 72 61 74
+	   65 6C 79 20 63
+	   61 6C 63 75 6C
+	   61 74 65 20 63
+	   20 75 6E 6C 65
+	   73 73 20 69 74
+	   20 69 73 20 61
+	   0D 0A 70 6F 73
+	   69 74 69 76 65
+	   20 69 6E 74 65
+	   67 65 72 2E 0D
+	   0A 0D 0A 00
 											"The program will then use the Pythagorean Theorem to find the third value in the Pythagorean Triple.",13,10,13,10,
 											"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a",13,10,
 											"positive integer.",13,10,13,10,0
- 0000017F 45 6E 74 65 72		input_prompt	BYTE	"Enter a positive integer: ",0
+ 00000184 45 6E 74 65 72		input_prompt	BYTE	"Enter a positive integer: ",0
 	   20 61 20 70 6F
 	   73 69 74 69 76
 	   65 20 69 6E 74
 	   65 67 65 72 3A
 	   20 00
- 0000019A 47 69 76 65 6E		result			BYTE	"Given your two inputs, the third value in the Pythagorean Triple is: ",0
+ 0000019F 47 69 76 65 6E		result			BYTE	"Given your two inputs, the third value in the Pythagorean Triple is: ",0
 	   20 79 6F 75 72
 	   20 74 77 6F 20
 	   69 6E 70 75 74
@@ -164,12 +165,12 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 					; Introduce the program
 					mDisplayString OFFSET title_disp
  00000000  52		     1		PUSH	EDX
- 00000001  BA 00000018 R     1		MOV		EDX, OFFSET title_disp
+ 00000001  BA 0000001C R     1		MOV		EDX, OFFSET title_disp
  00000006  E8 00000000 E     1		CALL	WriteString
  0000000B  5A		     1		POP		EDX
 					mDisplayString OFFSET introduction
  0000000C  52		     1		PUSH	EDX
- 0000000D  BA 00000050 R     1		MOV		EDX, OFFSET introduction
+ 0000000D  BA 00000054 R     1		MOV		EDX, OFFSET introduction
  00000012  E8 00000000 E     1		CALL	WriteString
  00000017  5A		     1		POP		EDX
 
@@ -178,12 +179,12 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 				; These will be a and b in the pythagorean theorem.
 				;---------------------------------------------------
  00000018  68 00000000 R		PUSH	OFFSET dec_a
- 0000001D  68 0000017F R		PUSH	OFFSET input_prompt
- 00000022  E8 0000006A			CALL	getDec
+ 0000001D  68 00000184 R		PUSH	OFFSET input_prompt
+ 00000022  E8 00000067			CALL	getDec
 
  00000027  68 00000004 R		PUSH	OFFSET dec_b
- 0000002C  68 0000017F R		PUSH	OFFSET input_prompt
- 00000031  E8 0000005B			CALL	getDec
+ 0000002C  68 00000184 R		PUSH	OFFSET input_prompt
+ 00000031  E8 00000058			CALL	getDec
 					
 				;----------------------------------------------------
 				; Now that we have the input, we need to calculate c
@@ -192,34 +193,34 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 					
 					; First calculate a^2
  00000036  FF 35 00000000 R		PUSH	dec_a
- 0000003C  68 0000000C R		PUSH	OFFSET a_squared
- 00000041  E8 00000071			CALL	squareVar
+ 0000003C  68 00000010 R		PUSH	OFFSET a_squared
+ 00000041  E8 0000006E			CALL	squareVar
 
 					; Then calculate b^2
  00000046  FF 35 00000004 R		PUSH	dec_b
- 0000004C  68 00000010 R		PUSH	OFFSET b_squared
- 00000051  E8 00000061			CALL	squareVar
+ 0000004C  68 00000014 R		PUSH	OFFSET b_squared
+ 00000051  E8 0000005E			CALL	squareVar
 
 					; a_squared + b_squared
- 00000056  FF 35 0000000C R		PUSH	a_squared
- 0000005C  FF 35 00000010 R		PUSH	b_squared
- 00000062  68 00000014 R		PUSH	OFFSET c_squared
- 00000067  E8 00000068			CALL	sumVar
+ 00000056  FF 35 00000010 R		PUSH	a_squared
+ 0000005C  FF 35 00000014 R		PUSH	b_squared
+ 00000062  68 00000018 R		PUSH	OFFSET c_squared
+ 00000067  E8 00000065			CALL	sumVar
 
 					; Now we have c^2, so wee need to get the square root of c
- 0000006C  DB 05 00000014 R		FILD	c_squared
- 00000072  D9 FA			FSQRT
- 00000074  DB 1D 00000008 R		FISTP	dec_c
+ 0000006C  9B DB E3			FINIT
+ 0000006F  DB 05 00000018 R		FILD	c_squared
+ 00000075  D9 FA			FSQRT
+ 00000077  DD 15 00000008 R		FST		dec_c
 
 					; Display results
- 0000007A  FF 35 00000008 R		PUSH	dec_c
- 00000080  68 0000019A R		PUSH	OFFSET result
- 00000085  E8 00000062			CALL	dispResult
+ 0000007D  68 0000019F R		PUSH	OFFSET result
+ 00000082  E8 00000062			CALL	dispResult
 
 				Invoke ExitProcess,0	; exit to operating system
- 0000008A  6A 00	   *	    push   +000000000h
- 0000008C  E8 00000000 E   *	    call   ExitProcess
- 00000091			main ENDP
+ 00000087  6A 00	   *	    push   +000000000h
+ 00000089  E8 00000000 E   *	    call   ExitProcess
+ 0000008E			main ENDP
 
 				;--------------------------------------------------------------------------------------------------------------------------------
 				; Name: getDec
@@ -236,29 +237,29 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 				; Returns: EAX, EBX, EDX, EBP are restored. 
 				;			[EBP+24] holds the input value.
 				;--------------------------------------------------------------------------------------------------------------------------------
- 00000091			getDec PROC USES EAX EDX EBX
- 00000091  50		   *	    push   eax
- 00000092  52		   *	    push   edx
- 00000093  53		   *	    push   ebx
- 00000094  55				PUSH	EBP
- 00000095  8B EC			MOV		EBP, ESP
+ 0000008E			getDec PROC USES EAX EDX EBX
+ 0000008E  50		   *	    push   eax
+ 0000008F  52		   *	    push   edx
+ 00000090  53		   *	    push   ebx
+ 00000091  55				PUSH	EBP
+ 00000092  8B EC			MOV		EBP, ESP
 
 					mDisplayString [EBP + 20]
- 00000097  52		     1		PUSH	EDX
- 00000098  8B 55 14	     1		MOV		EDX, [EBP + 20]
- 0000009B  E8 00000000 E     1		CALL	WriteString
- 000000A0  5A		     1		POP		EDX
- 000000A1  E8 00000000 E		CALL	readDec
- 000000A6  8B 5D 18			MOV		EBX, [EBP + 24]
- 000000A9  89 03			MOV		[EBX], EAX
- 000000AB  E8 00000000 E		CALL	CrLf
+ 00000094  52		     1		PUSH	EDX
+ 00000095  8B 55 14	     1		MOV		EDX, [EBP + 20]
+ 00000098  E8 00000000 E     1		CALL	WriteString
+ 0000009D  5A		     1		POP		EDX
+ 0000009E  E8 00000000 E		CALL	readDec
+ 000000A3  8B 5D 18			MOV		EBX, [EBP + 24]
+ 000000A6  89 03			MOV		[EBX], EAX
+ 000000A8  E8 00000000 E		CALL	CrLf
 
- 000000B0  5D				POP		EBP
- 000000B1  5B		   *	    pop    ebx
- 000000B2  5A		   *	    pop    edx
- 000000B3  58		   *	    pop    eax
- 000000B4  C2 0008			RET		8
- 000000B7			getDec ENDP
+ 000000AD  5D				POP		EBP
+ 000000AE  5B		   *	    pop    ebx
+ 000000AF  5A		   *	    pop    edx
+ 000000B0  58		   *	    pop    eax
+ 000000B1  C2 0008			RET		8
+ 000000B4			getDec ENDP
 
 				;--------------------------------------------------------------------------------------------------------------------------------
 				; Name: squareVar
@@ -275,24 +276,24 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 				; Returns: EAX, EBX, EBP are restored. 
 				;			[EBP+16] holds the squared value.
 				;--------------------------------------------------------------------------------------------------------------------------------
- 000000B7			squareVar PROC USES EAX EBX
- 000000B7  50		   *	    push   eax
- 000000B8  53		   *	    push   ebx
- 000000B9  55				PUSH	EBP
- 000000BA  8B EC			MOV		EBP, ESP
+ 000000B4			squareVar PROC USES EAX EBX
+ 000000B4  50		   *	    push   eax
+ 000000B5  53		   *	    push   ebx
+ 000000B6  55				PUSH	EBP
+ 000000B7  8B EC			MOV		EBP, ESP
 
- 000000BC  BA 00000000			MOV		EDX, 0
- 000000C1  8B 45 14			MOV		EAX, [EBP + 20]
- 000000C4  8B 5D 14			MOV		EBX, [EBP + 20]
- 000000C7  F7 E3			MUL		EBX
- 000000C9  8B 5D 10			MOV		EBX, [EBP + 16]
- 000000CC  89 03			MOV		[EBX], EAX
+ 000000B9  BA 00000000			MOV		EDX, 0
+ 000000BE  8B 45 14			MOV		EAX, [EBP + 20]
+ 000000C1  8B 5D 14			MOV		EBX, [EBP + 20]
+ 000000C4  F7 E3			MUL		EBX
+ 000000C6  8B 5D 10			MOV		EBX, [EBP + 16]
+ 000000C9  89 03			MOV		[EBX], EAX
 
- 000000CE  5D				POP		EBP
- 000000CF  5B		   *	    pop    ebx
- 000000D0  58		   *	    pop    eax
- 000000D1  C2 0008			RET		8
- 000000D4			squareVar ENDP
+ 000000CB  5D				POP		EBP
+ 000000CC  5B		   *	    pop    ebx
+ 000000CD  58		   *	    pop    eax
+ 000000CE  C2 0008			RET		8
+ 000000D1			squareVar ENDP
 
 				;--------------------------------------------------------------------------------------------------------------------------------
 				; Name: sumVar
@@ -310,27 +311,27 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 				; Returns: EAX, EBX, EDX, EBP are restored. 
 				;			[EBP+16] holds the squared value.
 				;--------------------------------------------------------------------------------------------------------------------------------
- 000000D4			sumVar PROC USES EAX EBX
- 000000D4  50		   *	    push   eax
- 000000D5  53		   *	    push   ebx
- 000000D6  55				PUSH	EBP
- 000000D7  8B EC			MOV		EBP, ESP
+ 000000D1			sumVar PROC USES EAX EBX
+ 000000D1  50		   *	    push   eax
+ 000000D2  53		   *	    push   ebx
+ 000000D3  55				PUSH	EBP
+ 000000D4  8B EC			MOV		EBP, ESP
 
- 000000D9  8B 45 18			MOV		EAX, [EBP + 24]
- 000000DC  8B 5D 14			MOV		EBX, [EBP + 20]
- 000000DF  03 C3			ADD		EAX, EBX
- 000000E1  8B 55 10			MOV		EDX, [EBP + 16]
- 000000E4  89 02			MOV		[EDX], EAX
+ 000000D6  8B 45 18			MOV		EAX, [EBP + 24]
+ 000000D9  8B 5D 14			MOV		EBX, [EBP + 20]
+ 000000DC  03 C3			ADD		EAX, EBX
+ 000000DE  8B 55 10			MOV		EDX, [EBP + 16]
+ 000000E1  89 02			MOV		[EDX], EAX
 
- 000000E6  5D				POP		EBP
- 000000E7  5B		   *	    pop    ebx
- 000000E8  58		   *	    pop    eax
- 000000E9  C2 000C			RET		12
- 000000EC			sumVar ENDP
+ 000000E3  5D				POP		EBP
+ 000000E4  5B		   *	    pop    ebx
+ 000000E5  58		   *	    pop    eax
+ 000000E6  C2 000C			RET		12
+ 000000E9			sumVar ENDP
 
 				;--------------------------------------------------------------------------------------------------------------------------------
 				; Name: dispResult
-				; Gets user input of a decimal number.
+				; Display program results
 				;
 				; Preconditions: None.
 				;
@@ -343,19 +344,19 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 				; Returns: EAX, EDX, EBP are restored. 
 				;			The results are printed.
 				;--------------------------------------------------------------------------------------------------------------------------------
- 000000EC			dispResult PROC USES EAX EDX
- 000000EC  50		   *	    push   eax
- 000000ED  52		   *	    push   edx
- 000000EE  55				PUSH	EBP
- 000000EF  8B EC			MOV		EBP, ESP
+ 000000E9			dispResult PROC USES EAX EDX
+ 000000E9  50		   *	    push   eax
+ 000000EA  52		   *	    push   edx
+ 000000EB  55				PUSH	EBP
+ 000000EC  8B EC			MOV		EBP, ESP
 
 					mDisplayString [EBP + 16]
- 000000F1  52		     1		PUSH	EDX
- 000000F2  8B 55 10	     1		MOV		EDX, [EBP + 16]
- 000000F5  E8 00000000 E     1		CALL	WriteString
- 000000FA  5A		     1		POP		EDX
- 000000FB  8B 45 14			MOV		EAX, [EBP + 20]
- 000000FE  E8 00000000 E		CALL	writeDec
+ 000000EE  52		     1		PUSH	EDX
+ 000000EF  8B 55 10	     1		MOV		EDX, [EBP + 16]
+ 000000F2  E8 00000000 E     1		CALL	WriteString
+ 000000F7  5A		     1		POP		EDX
+ 000000F8  DD 05 00000008 R		FLD		dec_c
+ 000000FE  E8 00000000 E		CALL	writeFloat
  00000103  E8 00000000 E		CALL	CrLf
 
  00000108  5D				POP		EBP
@@ -366,7 +367,7 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 
 
 				END main
-Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 14:50:17
 /Pythagorean Triple     (pythagorean_triple.asm		     Symbols 2 - 1
 
 
@@ -467,7 +468,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000001E0 Para	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000001E5 Para	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 0000010E Para	  Public  'CODE'	
 
 
@@ -575,13 +576,13 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-dispResult . . . . . . . . . . .	P Near	 000000EC _TEXT	Length= 00000022 Public STDCALL
-getDec . . . . . . . . . . . . .	P Near	 00000091 _TEXT	Length= 00000026 Public STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000091 Public STDCALL
+dispResult . . . . . . . . . . .	P Near	 000000E9 _TEXT	Length= 00000025 Public STDCALL
+getDec . . . . . . . . . . . . .	P Near	 0000008E _TEXT	Length= 00000026 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000008E Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
-squareVar  . . . . . . . . . . .	P Near	 000000B7 _TEXT	Length= 0000001D Public STDCALL
-sumVar . . . . . . . . . . . . .	P Near	 000000D4 _TEXT	Length= 00000018 Public STDCALL
+squareVar  . . . . . . . . . . .	P Near	 000000B4 _TEXT	Length= 0000001D Public STDCALL
+sumVar . . . . . . . . . . . . .	P Near	 000000D1 _TEXT	Length= 00000018 Public STDCALL
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 
 
@@ -798,21 +799,21 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-a_squared  . . . . . . . . . . .	DWord	 0000000C _DATA	
-b_squared  . . . . . . . . . . .	DWord	 00000010 _DATA	
+a_squared  . . . . . . . . . . .	DWord	 00000010 _DATA	
+b_squared  . . . . . . . . . . .	DWord	 00000014 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-c_squared  . . . . . . . . . . .	DWord	 00000014 _DATA	
+c_squared  . . . . . . . . . . .	DWord	 00000018 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 dec_a  . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 dec_b  . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-dec_c  . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+dec_c  . . . . . . . . . . . . .	QWord	 00000008 _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-input_prompt . . . . . . . . . .	Byte	 0000017F _DATA	
-introduction . . . . . . . . . .	Byte	 00000050 _DATA	
+input_prompt . . . . . . . . . .	Byte	 00000184 _DATA	
+introduction . . . . . . . . . .	Byte	 00000054 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -821,8 +822,8 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-result . . . . . . . . . . . . .	Byte	 0000019A _DATA	
-title_disp . . . . . . . . . . .	Byte	 00000018 _DATA	
+result . . . . . . . . . . . . .	Byte	 0000019F _DATA	
+title_disp . . . . . . . . . . .	Byte	 0000001C _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

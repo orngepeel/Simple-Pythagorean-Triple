@@ -32,7 +32,7 @@ ENDM
 	; variables
 	dec_a			DWORD	?
 	dec_b			DWORD	?
-	dec_c			DWORD	?
+	dec_c			REAL8	?
 
 	; squared variables
 	a_squared		DWORD	?
@@ -41,7 +41,7 @@ ENDM
 
 	; strings
 	title_disp		BYTE	"Simple Pythagorean Triple Program			By Devon Braner",13,10,13,10,0
-	introduction	BYTE	"Welcome! You will be prompted to enter two positive integer.",13,10,
+	introduction	BYTE	"Welcome! You will be prompted to enter two positive integers.",13,10,
 							"The program will then use the Pythagorean Theorem to find the third value in the Pythagorean Triple.",13,10,13,10,
 							"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a",13,10,
 							"positive integer.",13,10,13,10,0
@@ -89,12 +89,12 @@ main PROC
 	CALL	sumVar
 
 	; Now we have c^2, so wee need to get the square root of c
+	FINIT
 	FILD	c_squared
 	FSQRT
-	FISTP	dec_c
+	FST		dec_c
 
 	; Display results
-	PUSH	dec_c
 	PUSH	OFFSET result
 	CALL	dispResult
 
@@ -192,7 +192,7 @@ sumVar ENDP
 
 ;--------------------------------------------------------------------------------------------------------------------------------
 ; Name: dispResult
-; Gets user input of a decimal number.
+; Display program results
 ;
 ; Preconditions: None.
 ;
@@ -210,8 +210,8 @@ dispResult PROC USES EAX EDX
 	MOV		EBP, ESP
 
 	mDisplayString [EBP + 16]
-	MOV		EAX, [EBP + 20]
-	CALL	writeDec
+	FLD		dec_c
+	CALL	writeFloat
 	CALL	CrLf
 
 	POP		EBP
