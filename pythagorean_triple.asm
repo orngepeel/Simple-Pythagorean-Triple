@@ -1,7 +1,7 @@
 TITLE Pythagorean Triple     (pythagorean_triple.asm)
 
 ; Author: Devon Braner
-; Last Modified: 6/29/2022
+; Last Modified: 6/30/2022
 ; Description: A simple program that uses the pythagorean theorem to calculate
 ;				the third value in a Pythagorean Triple given two numbers input
 ;				by the user.
