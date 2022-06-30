@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 /Pythagorean Triple     (pythagorean_triple.asm		     Page 1 - 1
 
 
@@ -34,7 +34,7 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
 				; 
 				; Print a string stored in a specific memory location 
 				; 
-				; Preconditions: 
+				; Preconditions: None
 				; 
 				; Receives: string_param, memory OFFSET of a string.
 				; 
@@ -128,21 +128,22 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
 	   74 65 20 63 20
 	   75 6E 6C 65 73
 	   73 20 69 74 20
-	   69 73 20 61 20
-	   70 6F 73 69 74
-	   69 76 65 20 69
-	   6E 74 65 67 65
-	   72 2E 0D 0A 0D
-	   0A 00
+	   69 73 20 61 0D
+	   0A 70 6F 73 69
+	   74 69 76 65 20
+	   69 6E 74 65 67
+	   65 72 2E 0D 0A
+	   0D 0A 00
 											"The program will then use the Pythagorean Theorem to find the third value in the Pythagorean Triple.",13,10,13,10,
-											"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a positive integer.",13,10,13,10,0
- 0000017E 45 6E 74 65 72		input_prompt	BYTE	"Enter a positive integer: ",0
+											"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a",13,10,
+											"positive integer.",13,10,13,10,0
+ 0000017F 45 6E 74 65 72		input_prompt	BYTE	"Enter a positive integer: ",0
 	   20 61 20 70 6F
 	   73 69 74 69 76
 	   65 20 69 6E 74
 	   65 67 65 72 3A
 	   20 00
- 00000199 47 69 76 65 6E		result			BYTE	"Given your two inputs, the third value in the Pythagorean Triple is: ",0
+ 0000019A 47 69 76 65 6E		result			BYTE	"Given your two inputs, the third value in the Pythagorean Triple is: ",0
 	   20 79 6F 75 72
 	   20 74 77 6F 20
 	   69 6E 70 75 74
@@ -177,11 +178,11 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
 				; These will be a and b in the pythagorean theorem.
 				;---------------------------------------------------
  00000018  68 00000000 R		PUSH	OFFSET dec_a
- 0000001D  68 0000017E R		PUSH	OFFSET input_prompt
+ 0000001D  68 0000017F R		PUSH	OFFSET input_prompt
  00000022  E8 0000006A			CALL	getDec
 
  00000027  68 00000004 R		PUSH	OFFSET dec_b
- 0000002C  68 0000017E R		PUSH	OFFSET input_prompt
+ 0000002C  68 0000017F R		PUSH	OFFSET input_prompt
  00000031  E8 0000005B			CALL	getDec
 					
 				;----------------------------------------------------
@@ -212,7 +213,7 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
 
 					; Display results
  0000007A  FF 35 00000008 R		PUSH	dec_c
- 00000080  68 00000199 R		PUSH	OFFSET result
+ 00000080  68 0000019A R		PUSH	OFFSET result
  00000085  E8 00000062			CALL	dispResult
 
 				Invoke ExitProcess,0	; exit to operating system
@@ -365,7 +366,7 @@ Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
 
 
 				END main
-Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:52:10
+Microsoft (R) Macro Assembler Version 14.29.30139.0	    06/30/22 02:59:35
 /Pythagorean Triple     (pythagorean_triple.asm		     Symbols 2 - 1
 
 
@@ -466,7 +467,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000001DF Para	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000001E0 Para	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 0000010E Para	  Public  'CODE'	
 
 
@@ -810,7 +811,7 @@ dec_c  . . . . . . . . . . . . .	DWord	 00000008 _DATA
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-input_prompt . . . . . . . . . .	Byte	 0000017E _DATA	
+input_prompt . . . . . . . . . .	Byte	 0000017F _DATA	
 introduction . . . . . . . . . .	Byte	 00000050 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
@@ -820,7 +821,7 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-result . . . . . . . . . . . . .	Byte	 00000199 _DATA	
+result . . . . . . . . . . . . .	Byte	 0000019A _DATA	
 title_disp . . . . . . . . . . .	Byte	 00000018 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

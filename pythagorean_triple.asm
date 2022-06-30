@@ -43,7 +43,8 @@ ENDM
 	title_disp		BYTE	"Simple Pythagorean Triple Program			By Devon Braner",13,10,13,10,0
 	introduction	BYTE	"Welcome! You will be prompted to enter two positive integer.",13,10,
 							"The program will then use the Pythagorean Theorem to find the third value in the Pythagorean Triple.",13,10,13,10,
-							"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a positive integer.",13,10,13,10,0
+							"Disclaimer: This program does not currently perform validation, and doesn't accurately calculate c unless it is a",13,10,
+							"positive integer.",13,10,13,10,0
 	input_prompt	BYTE	"Enter a positive integer: ",0
 	result			BYTE	"Given your two inputs, the third value in the Pythagorean Triple is: ",0
 	
